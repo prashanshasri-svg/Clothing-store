@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>UrbanThread - Product</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Manrope:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface": "#fdf8f8",
+              "surface-container": "#f1edec",
+              "surface-container-low": "#f7f3f2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e5e2e1",
+              "on-surface": "#1c1b1b",
+              "on-surface-variant": "#444748",
+              "primary": "#000000",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#e5e2e1",
+              "secondary": "#5f559a",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#bdb2ff",
+              "on-secondary-container": "#4b4185",
+              "secondary-fixed": "#e5deff",
+              "outline": "#747878",
+              "outline-variant": "#c4c7c7"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "xs": "4px",
+              "sm": "8px",
+              "md": "16px",
+              "lg": "24px",
+              "xl": "32px",
+              "xxl": "48px",
+              "margin": "24px"
+            },
+            "fontFamily": {
+              "display-xl": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "headline-md": ["Epilogue"],
+              "body-lg": ["Manrope"],
+              "body-md": ["Manrope"],
+              "label-sm": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fdf8f8; display: flex; flex-direction: column; min-height: 100vh; }
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+    <div id="navbar-container"></div>
+
+    <main class="pt-[100px] flex-grow max-w-7xl mx-auto px-margin w-full pb-xxl">
+        <!-- Breadcrumbs -->
+        <nav class="flex text-sm text-on-surface-variant mb-lg font-label-sm uppercase tracking-wider" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="index.html" class="hover:text-primary transition-colors">Home</a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+                        <a href="shop.html" class="hover:text-primary transition-colors">Shop</a>
+                    </div>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+                        <span class="text-primary font-bold" id="breadcrumb-product-name">Product</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-xl lg:gap-xxl">
+            <!-- Image Gallery -->
+            <div class="flex flex-col-reverse md:flex-row gap-md h-[500px] md:h-[700px]">
+                <div class="flex md:flex-col gap-sm overflow-x-auto md:overflow-y-auto no-scrollbar w-full md:w-24 flex-shrink-0" id="thumbnail-gallery">
+                    <!-- Thumbnails injected here -->
+                </div>
+                <div class="flex-grow bg-surface-container rounded-xl overflow-hidden relative">
+                    <img id="main-product-image" src="" class="w-full h-full object-cover transition-opacity duration-300" alt="Product Image"/>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="flex flex-col py-md">
+                <div class="mb-lg border-b border-surface-variant pb-lg">
+                    <div class="flex items-center gap-sm mb-xs">
+                        <span class="font-label-sm text-on-surface-variant tracking-[0.2em] uppercase" id="product-category">Category</span>
+                        <span class="px-sm py-xs bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded tracking-wider hidden" id="product-badge"></span>
+                    </div>
+                    <h1 class="font-display-xl text-[40px] leading-tight mb-md" id="product-name">Product Name</h1>
+                    <p class="font-headline-md text-primary" id="product-price">$0.00</p>
+                </div>
+
+                <div class="mb-xl">
+                    <p class="text-on-surface-variant font-body-lg leading-relaxed" id="product-description">
+                        Description goes here.
+                    </p>
+                </div>
+
+                <!-- Size Selector -->
+                <div class="mb-xl">
+                    <div class="flex justify-between items-center mb-sm">
+                        <span class="font-label-sm text-primary tracking-wider uppercase">Select Size</span>
+                        <a href="#" class="font-label-sm text-on-surface-variant underline hover:text-primary transition-colors">Size Guide</a>
+                    </div>
+                    <div class="grid grid-cols-4 gap-sm" id="size-selector">
+                        <button class="size-btn h-12 border border-outline rounded-lg flex items-center justify-center font-label-sm hover:border-primary hover:bg-surface-variant transition-colors" data-size="S">S</button>
+                        <button class="size-btn h-12 border border-outline rounded-lg flex items-center justify-center font-label-sm hover:border-primary hover:bg-surface-variant transition-colors" data-size="M">M</button>
+                        <button class="size-btn h-12 border border-outline rounded-lg flex items-center justify-center font-label-sm hover:border-primary hover:bg-surface-variant transition-colors" data-size="L">L</button>
+                        <button class="size-btn h-12 border border-outline rounded-lg flex items-center justify-center font-label-sm hover:border-primary hover:bg-surface-variant transition-colors" data-size="XL">XL</button>
+                    </div>
+                    <p class="text-error text-sm mt-2 hidden" id="size-error">Please select a size.</p>
+                </div>
+
+                <!-- Action -->
+                <button id="add-to-cart-btn" class="w-full bg-primary text-on-primary h-14 rounded-lg font-label-sm text-label-sm uppercase tracking-wider shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95 active:translate-y-0 transition-all flex items-center justify-center gap-sm">
+                    <span>Add to Cart</span>
+                    <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                </button>
+
+                <!-- Shipping info -->
+                <div class="mt-xl flex flex-col gap-sm border border-surface-variant rounded-xl p-md bg-white">
+                    <div class="flex items-center gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                        <span class="font-body-md text-sm">Free shipping on orders over $150</span>
+                    </div>
+                    <div class="flex items-center gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[20px]">sync</span>
+                        <span class="font-body-md text-sm">Free 30-day returns</span>
+                    </div>
+                    <div class="flex items-center gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[20px]">eco</span>
+                        <span class="font-body-md text-sm">Sustainably packaged</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast bg-primary text-on-primary px-lg py-md rounded-xl shadow-2xl flex items-center gap-md">
+        <span class="material-symbols-outlined text-secondary-fixed">check_circle</span>
+        <div>
+            <p class="font-label-sm tracking-wider uppercase mb-1">Added to Cart</p>
+            <p class="font-body-md text-sm opacity-90" id="toast-message">Item added to your cart.</p>
+        </div>
+        <a href="cart.html" class="ml-sm font-label-sm text-secondary-fixed hover:text-white underline transition-colors">View Cart</a>
+    </div>
+
+    <script type="module">
+        import { setupCommonElements } from './js/components.js';
+        import { products, getProductById } from './js/data.js';
+        import { cart } from './js/store.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonElements();
+
+            // Get product ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || 'p1';
+            const product = getProductById(productId);
+
+            if (!product) {
+                document.querySelector('main').innerHTML = '<h1 class="text-center font-display-xl py-xxl">Product not found.</h1>';
+                return;
+            }
+
+            // Populate UI
+            document.getElementById('breadcrumb-product-name').textContent = product.name;
+            document.getElementById('product-category').textContent = product.category;
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-description').textContent = product.description;
+            
+            const mainImg = document.getElementById('main-product-image');
+            mainImg.src = product.image;
+
+            if (product.badge) {
+                const badgeEl = document.getElementById('product-badge');
+                badgeEl.textContent = product.badge;
+                badgeEl.classList.remove('hidden');
+            }
+
+            // Setup mock gallery (using same image with slight filters for demo)
+            const thumbnailHtml = `
+                <button class="w-20 h-24 md:w-full md:h-32 flex-shrink-0 rounded-lg overflow-hidden border-2 border-primary thumbnail-btn" data-src="${product.image}">
+                    <img src="${product.image}" class="w-full h-full object-cover" />
+                </button>
+                <button class="w-20 h-24 md:w-full md:h-32 flex-shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-outline-variant thumbnail-btn" data-src="${product.image}" style="filter: grayscale(0.5);">
+                    <img src="${product.image}" class="w-full h-full object-cover" />
+                </button>
+                <button class="w-20 h-24 md:w-full md:h-32 flex-shrink-0 rounded-lg overflow-hidden border-2 border-transparent hover:border-outline-variant thumbnail-btn" data-src="${product.image}" style="filter: sepia(0.3);">
+                    <img src="${product.image}" class="w-full h-full object-cover" />
+                </button>
+            `;
+            document.getElementById('thumbnail-gallery').innerHTML = thumbnailHtml;
+
+            // Gallery interaction
+            document.querySelectorAll('.thumbnail-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Update active state
+                    document.querySelectorAll('.thumbnail-btn').forEach(b => {
+                        b.classList.remove('border-primary');
+                        b.classList.add('border-transparent');
+                    });
+                    const currentBtn = e.currentTarget;
+                    currentBtn.classList.add('border-primary');
+                    currentBtn.classList.remove('border-transparent');
+                    
+                    // Update main image with a simple fade effect
+                    mainImg.style.opacity = '0.5';
+                    setTimeout(() => {
+                        mainImg.style.filter = currentBtn.style.filter || 'none';
+                        mainImg.style.opacity = '1';
+                    }, 150);
+                });
+            });
+
+            // Size selection
+            let selectedSize = null;
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            const sizeError = document.getElementById('size-error');
+
+            sizeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    sizeBtns.forEach(b => {
+                        b.classList.remove('bg-primary', 'text-white', 'border-primary');
+                        b.classList.add('border-outline');
+                    });
+                    const target = e.currentTarget;
+                    target.classList.add('bg-primary', 'text-white', 'border-primary');
+                    target.classList.remove('border-outline');
+                    selectedSize = target.dataset.size;
+                    sizeError.classList.add('hidden');
+                });
+            });
+
+            // Add to cart
+            document.getElementById('add-to-cart-btn').addEventListener('click', () => {
+                if (!selectedSize) {
+                    sizeError.classList.remove('hidden');
+                    // Shake animation for error
+                    const btn = document.getElementById('add-to-cart-btn');
+                    btn.classList.add('animate-pulse');
+                    setTimeout(() => btn.classList.remove('animate-pulse'), 500);
+                    return;
+                }
+
+                cart.addItem(product, selectedSize);
+
+                // Show toast
+                const toast = document.getElementById('toast');
+                document.getElementById('toast-message').textContent = `${product.name} (Size ${selectedSize})`;
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>

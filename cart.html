@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>UrbanThread - Cart</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Manrope:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface": "#fdf8f8",
+              "surface-container": "#f1edec",
+              "surface-container-low": "#f7f3f2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e5e2e1",
+              "on-surface": "#1c1b1b",
+              "on-surface-variant": "#444748",
+              "primary": "#000000",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#e5e2e1",
+              "secondary": "#5f559a",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#bdb2ff",
+              "on-secondary-container": "#4b4185",
+              "secondary-fixed": "#e5deff",
+              "outline": "#747878",
+              "outline-variant": "#c4c7c7"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "xs": "4px",
+              "sm": "8px",
+              "md": "16px",
+              "lg": "24px",
+              "xl": "32px",
+              "xxl": "48px",
+              "margin": "24px"
+            },
+            "fontFamily": {
+              "display-xl": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "headline-md": ["Epilogue"],
+              "body-lg": ["Manrope"],
+              "body-md": ["Manrope"],
+              "label-sm": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fdf8f8; display: flex; flex-direction: column; min-height: 100vh; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+    <div id="navbar-container"></div>
+
+    <main class="pt-[100px] flex-grow max-w-7xl mx-auto px-margin w-full pb-xxl">
+        <h1 class="font-display-xl text-display-xl mb-xl">Your Cart</h1>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl" id="cart-content">
+            <!-- Empty state fallback handled in JS -->
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { setupCommonElements } from './js/components.js';
+        import { cart } from './js/store.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonElements();
+            renderCart();
+
+            // Subscribe to cart changes to re-render
+            cart.subscribe(() => {
+                renderCart();
+            });
+        });
+
+        function renderCart() {
+            const container = document.getElementById('cart-content');
+            const items = cart.items;
+
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="lg:col-span-12 text-center py-xxl bg-white rounded-xl shadow-sm border border-surface-variant">
+                        <span class="material-symbols-outlined text-[64px] text-outline-variant mb-md block">shopping_bag</span>
+                        <h2 class="font-headline-lg mb-sm">Your cart is empty</h2>
+                        <p class="text-on-surface-variant mb-xl">Looks like you haven't added anything yet.</p>
+                        <a href="shop.html" class="inline-block bg-primary text-on-primary px-xl py-md rounded-lg font-label-sm uppercase tracking-wider hover:scale-105 transition-transform">
+                            Continue Shopping
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            const itemsHtml = items.map(item => `
+                <div class="flex gap-md py-lg border-b border-surface-variant">
+                    <div class="w-24 h-32 md:w-32 md:h-40 flex-shrink-0 bg-surface-container rounded-lg overflow-hidden">
+                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-grow flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-headline-md text-[18px] md:text-[20px] leading-tight mb-xs">${item.name}</h3>
+                                <p class="text-on-surface-variant font-label-sm uppercase tracking-wider mb-sm">Size: ${item.size}</p>
+                            </div>
+                            <button class="remove-btn text-on-surface-variant hover:text-error transition-colors p-1" data-id="${item.id}" data-size="${item.size}">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center border border-outline rounded-md overflow-hidden bg-white">
+                                <button class="qty-btn minus w-8 h-8 flex items-center justify-center hover:bg-surface-variant transition-colors" data-id="${item.id}" data-size="${item.size}" data-qty="${item.quantity - 1}">-</button>
+                                <span class="w-8 text-center font-label-sm">${item.quantity}</span>
+                                <button class="qty-btn plus w-8 h-8 flex items-center justify-center hover:bg-surface-variant transition-colors" data-id="${item.id}" data-size="${item.size}" data-qty="${item.quantity + 1}">+</button>
+                            </div>
+                            <p class="font-headline-md font-bold text-primary">$${(item.price * item.quantity).toFixed(2)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = cart.getTotalPrice();
+            const shipping = subtotal > 150 ? 0 : 15;
+            const total = subtotal + shipping;
+
+            container.innerHTML = `
+                <div class="lg:col-span-8 bg-white rounded-xl shadow-sm p-lg">
+                    <h2 class="font-headline-md border-b border-surface-variant pb-sm mb-sm text-[18px]">Items (${cart.getTotalItems()})</h2>
+                    <div class="flex flex-col">
+                        ${itemsHtml}
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4">
+                    <div class="bg-white rounded-xl shadow-[0px_10px_30px_rgba(0,0,0,0.05)] p-lg sticky top-[100px]">
+                        <h2 class="font-headline-md border-b border-surface-variant pb-sm mb-md text-[18px]">Order Summary</h2>
+                        
+                        <div class="flex justify-between mb-sm text-on-surface-variant">
+                            <span>Subtotal</span>
+                            <span>$${subtotal.toFixed(2)}</span>
+                        </div>
+                        <div class="flex justify-between mb-lg text-on-surface-variant pb-md border-b border-surface-variant">
+                            <span>Shipping</span>
+                            <span>${shipping === 0 ? 'Free' : '$' + shipping.toFixed(2)}</span>
+                        </div>
+                        
+                        <div class="flex justify-between mb-xl">
+                            <span class="font-headline-md text-[20px]">Total</span>
+                            <span class="font-headline-md text-[20px] text-primary font-bold">$${total.toFixed(2)}</span>
+                        </div>
+                        
+                        <button id="checkout-btn" class="w-full bg-primary text-on-primary py-md rounded-lg font-label-sm uppercase tracking-wider shadow-lg hover:-translate-y-0.5 hover:shadow-xl active:scale-95 transition-all">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const { id, size } = e.currentTarget.dataset;
+                    cart.removeItem(id, size);
+                });
+            });
+
+            document.querySelectorAll('.qty-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const { id, size, qty } = e.currentTarget.dataset;
+                    cart.updateQuantity(id, size, parseInt(qty, 10));
+                });
+            });
+
+            const checkoutBtn = document.getElementById('checkout-btn');
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', () => {
+                    checkoutBtn.innerHTML = '<span class="material-symbols-outlined animate-spin mr-2">progress_activity</span> Processing...';
+                    setTimeout(() => {
+                        alert('This is a prototype. Checkout functionality is mocked!');
+                        cart.items = []; // Clear cart
+                        cart.notify();
+                        window.location.href = 'index.html';
+                    }, 1500);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

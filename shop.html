@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>UrbanThread - Shop</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Manrope:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface": "#fdf8f8",
+              "surface-container": "#f1edec",
+              "surface-container-low": "#f7f3f2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e5e2e1",
+              "on-surface": "#1c1b1b",
+              "on-surface-variant": "#444748",
+              "primary": "#000000",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#e5e2e1",
+              "secondary": "#5f559a",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#bdb2ff",
+              "on-secondary-container": "#4b4185",
+              "secondary-fixed": "#e5deff",
+              "outline": "#747878",
+              "outline-variant": "#c4c7c7"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "xs": "4px",
+              "sm": "8px",
+              "md": "16px",
+              "lg": "24px",
+              "xl": "32px",
+              "xxl": "48px",
+              "margin": "24px"
+            },
+            "fontFamily": {
+              "display-xl": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "headline-md": ["Epilogue"],
+              "body-lg": ["Manrope"],
+              "body-md": ["Manrope"],
+              "label-sm": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fdf8f8; display: flex; flex-direction: column; min-height: 100vh; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+    <div id="navbar-container"></div>
+
+    <main class="pt-[100px] flex-grow max-w-7xl mx-auto px-margin w-full">
+        <!-- Header -->
+        <div class="mb-xl flex flex-col md:flex-row justify-between items-end gap-md border-b border-outline-variant pb-md">
+            <div>
+                <h1 class="font-display-xl text-display-xl mb-sm">All Products</h1>
+                <p class="text-on-surface-variant font-body-md">Discover our latest collection of sustainable urban fashion.</p>
+            </div>
+            
+            <div class="flex gap-sm w-full md:w-auto">
+                <!-- Mock Filter Dropdown -->
+                <button class="flex items-center justify-between gap-sm border border-outline rounded-lg px-md py-sm font-label-sm text-label-sm w-full md:w-48 hover:bg-surface-variant transition-colors">
+                    <span>Filter by Category</span>
+                    <span class="material-symbols-outlined" data-icon="expand_more">expand_more</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-xl mb-xxl">
+            <!-- Sidebar Filters -->
+            <aside class="hidden md:block w-64 flex-shrink-0">
+                <h3 class="font-headline-md text-[18px] mb-md border-b border-surface-variant pb-sm">Categories</h3>
+                <ul class="space-y-sm mb-lg">
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" checked class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">All</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Men</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Women</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Streetwear</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Essentials</span></label></li>
+                </ul>
+
+                <h3 class="font-headline-md text-[18px] mb-md border-b border-surface-variant pb-sm">Size</h3>
+                <div class="flex flex-wrap gap-sm">
+                    <button class="w-10 h-10 border border-outline rounded-md flex items-center justify-center font-label-sm hover:bg-surface-variant transition-colors">S</button>
+                    <button class="w-10 h-10 border border-outline rounded-md flex items-center justify-center font-label-sm hover:bg-surface-variant transition-colors">M</button>
+                    <button class="w-10 h-10 border border-outline rounded-md flex items-center justify-center font-label-sm hover:bg-surface-variant transition-colors">L</button>
+                    <button class="w-10 h-10 border border-outline rounded-md flex items-center justify-center font-label-sm hover:bg-surface-variant transition-colors">XL</button>
+                </div>
+            </aside>
+
+            <!-- Product Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg flex-grow" id="product-grid">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { setupCommonElements } from './js/components.js';
+        import { products } from './js/data.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonElements();
+
+            const gridContainer = document.getElementById('product-grid');
+            
+            gridContainer.innerHTML = products.map(product => `
+                <a href="product.html?id=${product.id}" class="group bg-white rounded-xl p-md shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 flex flex-col cursor-pointer">
+                    <div class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container mb-md relative">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${product.image}" alt="${product.name}"/>
+                        ${product.badge ? `<div class="absolute top-sm right-sm px-sm py-xs bg-secondary-container/80 backdrop-blur-sm rounded text-[10px] font-bold text-on-secondary-container tracking-wider">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="flex justify-between items-start mb-xs">
+                        <h3 class="font-headline-md text-[18px] text-on-surface line-clamp-1 flex-grow pr-sm">${product.name}</h3>
+                        <span class="font-body-md text-on-surface-variant font-bold">$${product.price.toFixed(2)}</span>
+                    </div>
+                    <p class="text-sm text-on-surface-variant/70 mb-md line-clamp-2">${product.description}</p>
+                    <div class="mt-auto pt-sm border-t border-surface-variant w-full text-center font-label-sm text-primary tracking-widest uppercase hover:text-secondary transition-colors">
+                        View Product
+                    </div>
+                </a>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

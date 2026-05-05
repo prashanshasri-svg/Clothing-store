@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>UrbanThread - Home</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&family=Manrope:wght@400;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface": "#fdf8f8",
+              "surface-container": "#f1edec",
+              "surface-container-low": "#f7f3f2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e5e2e1",
+              "on-surface": "#1c1b1b",
+              "on-surface-variant": "#444748",
+              "primary": "#000000",
+              "on-primary": "#ffffff",
+              "primary-fixed": "#e5e2e1",
+              "secondary": "#5f559a",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#bdb2ff",
+              "on-secondary-container": "#4b4185",
+              "secondary-fixed": "#e5deff",
+              "outline": "#747878",
+            },
+            "borderRadius": {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            "spacing": {
+              "xs": "4px",
+              "sm": "8px",
+              "md": "16px",
+              "lg": "24px",
+              "xl": "32px",
+              "xxl": "48px",
+              "margin": "24px"
+            },
+            "fontFamily": {
+              "display-xl": ["Epilogue"],
+              "headline-lg": ["Epilogue"],
+              "headline-md": ["Epilogue"],
+              "body-lg": ["Manrope"],
+              "body-md": ["Manrope"],
+              "label-sm": ["Manrope"]
+            },
+            "fontSize": {
+              "display-xl": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+              "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+              "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fdf8f8; display: flex; flex-direction: column; min-height: 100vh; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+
+    <div id="navbar-container"></div>
+
+    <main class="pt-[72px] flex-grow">
+        <!-- Hero Section -->
+        <section class="relative w-full h-[600px] md:h-[870px] overflow-hidden bg-surface-container">
+            <div class="absolute inset-0">
+                <img class="w-full h-full object-cover object-center brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwW7_8ssjNkpN3p9MWng0MssS0_q-vXC5Owua9HRI_bKLXiGYU3sGZXaSlw8BupiGMSMj3yHzEmCysKehbCY4nuJS5GKP0_b69dvsS48ZAl9B9f31Rot56y-WKZ9eZ-22Tr1WLWIDDecPVhry2Dhj1x6-zKqtQUeNYL3CZcOa-_0u-i__Rp5582S8D3XKXrfZ0L41KqVx3gaMU9Dt4SNg0__OlAzwi8mZNWy_5tzImIY7nYdY0qiJCEhBRXBa4fhD1PG_Za5bPWQ" alt="Hero Image"/>
+            </div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-margin bg-black/10">
+                <h1 class="font-display-xl text-display-xl text-white mb-lg drop-shadow-lg">Wear Your Story</h1>
+                <a href="shop.html" class="bg-primary text-on-primary px-xxl py-md rounded-lg font-label-sm text-label-sm shadow-xl scale-95 hover:scale-100 active:scale-90 transition-transform">
+                    Shop Collection
+                </a>
+            </div>
+        </section>
+
+        <!-- Categories Bento Grid -->
+        <section class="max-w-7xl mx-auto px-margin py-xxl">
+            <h2 class="font-headline-lg text-headline-lg mb-xl text-center">The Edit</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-lg">
+                <a href="shop.html" class="group relative aspect-[3/4] overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-lg transition-all cursor-pointer block">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDP-Tclp4kD3e9NGzuw41QaJjWfhCfLMW8SoVv13FLSlbc4rVQHNR232EfwqquGQCnle4-ooSCpkkaKlPAMikuLKW2ChYQRod2Kr2wnKc90xFnJJEszG8a86wv8ZH4ZaJuWbId4vLepeoDGFMHFj0PENV8cRwRS9bGp_71yuGHTleTh0oQh3r3qyAaKIc4MtxcVIuhEv5k4NWGDBLyJisq0A4t4KjO-sSO62LeCkbc4YhBIKswWF0JGtKr0vIWeFtfJAdrNXsPenQ"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+                        <span class="font-headline-md text-headline-md text-white group-hover:-translate-y-2 transition-transform">Men</span>
+                    </div>
+                </a>
+                <a href="shop.html" class="group relative aspect-[3/4] overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-lg transition-all cursor-pointer block">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ1hivbsfN5PxdkBvNeai3UMdl-h50QnGhLjd37xZE3U1vPdUJYDG079DSTpNrgUGeZLuCUan6fiK9uj_ZTKutIPtUxCtYaaPhezoTkFN0TS-ns9Hrx_-M7uXfw7kl4vySyyOzxykkUhrXXR4e1T_cvXz5dPMrnnWNT12z3wnttoNQFFO_j45ozGg0hlCwRMukcN85_UNFhNM9ViEeHEZaSYUt4SIHE3AlTOXna6GCn5Q674EXmtm7FVVLTxE63t0CCrD9fpqYjg"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+                        <span class="font-headline-md text-headline-md text-white group-hover:-translate-y-2 transition-transform">Women</span>
+                    </div>
+                </a>
+                <a href="shop.html" class="group relative aspect-[3/4] overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-lg transition-all cursor-pointer block">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjJxs6WK3QtZAXmlisamHcj5zm3zmZhLGpQe3SBSgNJ4iXtaFpeabwxL9XCCz_mTkJvtfeM3O8nTXxBeoL_xvD-3XSJPcYeRAlstReNHJRyptvPdA0kks__rkMh36lKNirI7lvnL8yvAPdb0Gy4G5-d0c6o8rvhz3vFOpjjQr-SKQLNkzGuo_M1JabCfu9A6bvgSjIppqKUpYE2Nu97g2kVKkQ4oDQC6WdY-61IkhKux_cGXeFGJj5nMqSksT3zsdvpqaHK9ZpCA"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+                        <span class="font-headline-md text-headline-md text-white group-hover:-translate-y-2 transition-transform">Streetwear</span>
+                    </div>
+                </a>
+                <a href="shop.html" class="group relative aspect-[3/4] overflow-hidden rounded-xl bg-white shadow-sm hover:shadow-lg transition-all cursor-pointer block">
+                    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPKNY3paI7qB4hQOeYytW3JAlLWNCC9b2mMNGu5S_ZYYEqG7pHOhaWt6p7S84dR8qE261v0FWh9rXi69XMKfNAnbnwEe6qA17fQV0DbfKa4m_NF-NH3xPDjnen8iboDfsHTFHnrxL5CwbjGbqYCKv8hzdT7Pqt8_WScliUto2yZ9GD6y-ih7Rbmk8vE9AshXujFJBPDQRNIi2VrtSzjEJVPrpjRW1LRBZQ3S6qg-g4jYaY80phXSNp4ZnKRSgSjNwsbL931KSn_Q"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-lg">
+                        <span class="font-headline-md text-headline-md text-white group-hover:-translate-y-2 transition-transform">Essentials</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Sale Banner -->
+        <section class="w-full bg-secondary-container py-xxl px-margin my-xl">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-lg">
+                <div class="text-on-secondary-container text-center md:text-left">
+                    <span class="font-label-sm text-label-sm block mb-xs tracking-[0.2em] uppercase">Limited Time Only</span>
+                    <h2 class="font-headline-lg text-headline-lg">Seasonal Essentials - Up to 40% Off</h2>
+                </div>
+                <a href="shop.html" class="bg-primary text-on-primary px-xl py-md rounded-lg font-label-sm text-label-sm transition-transform hover:scale-105 active:scale-95 inline-block">
+                    View Sale
+                </a>
+            </div>
+        </section>
+
+        <!-- Trending Carousel -->
+        <section class="max-w-7xl mx-auto px-margin py-xxl">
+            <div class="flex justify-between items-end mb-xl">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg">Trending Now</h2>
+                    <p class="text-on-surface-variant font-body-md">Highly coveted pieces this week.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg" id="trending-products">
+                <!-- Products dynamically injected here -->
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script type="module">
+        import { setupCommonElements } from './js/components.js';
+        import { products } from './js/data.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCommonElements();
+
+            // Inject top 4 products
+            const trendingContainer = document.getElementById('trending-products');
+            const topProducts = products.slice(0, 4);
+
+            trendingContainer.innerHTML = topProducts.map(product => `
+                <a href="product.html?id=${product.id}" class="group bg-white rounded-xl p-md shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 flex flex-col cursor-pointer">
+                    <div class="aspect-square rounded-lg overflow-hidden bg-surface-container mb-md relative">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${product.image}" alt="${product.name}"/>
+                        ${product.badge ? `<div class="absolute top-sm right-sm px-sm py-xs bg-secondary-container/80 backdrop-blur-sm rounded text-[10px] font-bold text-on-secondary-container tracking-wider">${product.badge}</div>` : ''}
+                    </div>
+                    <h3 class="font-headline-md text-[18px] mb-xs text-on-surface">${product.name}</h3>
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="font-body-md text-on-surface-variant">$${product.price.toFixed(2)}</span>
+                    </div>
+                </a>
+            `).join('');
+        });
+    </script>
+</body>
+</html>
