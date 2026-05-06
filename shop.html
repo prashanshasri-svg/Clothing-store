@@ -91,8 +91,6 @@
                     <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" checked class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">All</span></label></li>
                     <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Men</span></label></li>
                     <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Women</span></label></li>
-                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Streetwear</span></label></li>
-                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Essentials</span></label></li>
                 </ul>
 
                 <h3 class="font-headline-md text-[18px] mb-md border-b border-surface-variant pb-sm">Size</h3>
@@ -121,23 +119,61 @@
             setupCommonElements();
 
             const gridContainer = document.getElementById('product-grid');
+            const checkboxes = document.querySelectorAll('aside ul input[type="checkbox"]');
             
-            gridContainer.innerHTML = products.map(product => `
-                <a href="product.html?id=${product.id}" class="group bg-white rounded-xl p-md shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 flex flex-col cursor-pointer">
-                    <div class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container mb-md relative">
-                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${product.image}" alt="${product.name}"/>
-                        ${product.badge ? `<div class="absolute top-sm right-sm px-sm py-xs bg-secondary-container/80 backdrop-blur-sm rounded text-[10px] font-bold text-on-secondary-container tracking-wider">${product.badge}</div>` : ''}
-                    </div>
-                    <div class="flex justify-between items-start mb-xs">
-                        <h3 class="font-headline-md text-[18px] text-on-surface line-clamp-1 flex-grow pr-sm">${product.name}</h3>
-                        <span class="font-body-md text-on-surface-variant font-bold">$${product.price.toFixed(2)}</span>
-                    </div>
-                    <p class="text-sm text-on-surface-variant/70 mb-md line-clamp-2">${product.description}</p>
-                    <div class="mt-auto pt-sm border-t border-surface-variant w-full text-center font-label-sm text-primary tracking-widest uppercase hover:text-secondary transition-colors">
-                        View Product
-                    </div>
-                </a>
-            `).join('');
+            function renderProducts(productsToRender) {
+                if (productsToRender.length === 0) {
+                    gridContainer.innerHTML = '<p class="col-span-full text-center py-xl text-on-surface-variant">No products found for the selected category.</p>';
+                    return;
+                }
+                gridContainer.innerHTML = productsToRender.map(product => `
+                    <a href="product.html?id=${product.id}" class="group bg-white rounded-xl p-md shadow-sm transition-all hover:shadow-lg hover:-translate-y-1 flex flex-col cursor-pointer">
+                        <div class="aspect-[3/4] rounded-lg overflow-hidden bg-surface-container mb-md relative">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="${product.image}" alt="${product.name}"/>
+                            ${product.badge ? `<div class="absolute top-sm right-sm px-sm py-xs bg-secondary-container/80 backdrop-blur-sm rounded text-[10px] font-bold text-on-secondary-container tracking-wider">${product.badge}</div>` : ''}
+                        </div>
+                        <div class="flex justify-between items-start mb-xs">
+                            <h3 class="font-headline-md text-[18px] text-on-surface line-clamp-1 flex-grow pr-sm">${product.name}</h3>
+                            <span class="font-body-md text-on-surface-variant font-bold">$${product.price.toFixed(2)}</span>
+                        </div>
+                        <p class="text-sm text-on-surface-variant/70 mb-md line-clamp-2">${product.description}</p>
+                        <div class="mt-auto pt-sm border-t border-surface-variant w-full text-center font-label-sm text-primary tracking-widest uppercase hover:text-secondary transition-colors">
+                            View Product
+                        </div>
+                    </a>
+                `).join('');
+            }
+            
+            renderProducts(products);
+
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const labelSpan = e.target.nextElementSibling.textContent.trim();
+                    
+                    if (labelSpan === 'All' && e.target.checked) {
+                        checkboxes.forEach(c => {
+                            if (c !== e.target) c.checked = false;
+                        });
+                    } else if (labelSpan !== 'All' && e.target.checked) {
+                        checkboxes[0].checked = false; 
+                    }
+
+                    const activeCategories = Array.from(checkboxes)
+                        .filter(c => c.checked && c.nextElementSibling.textContent.trim() !== 'All')
+                        .map(c => c.nextElementSibling.textContent.trim());
+
+                    if (activeCategories.length === 0 && !checkboxes[0].checked) {
+                        checkboxes[0].checked = true;
+                    }
+
+                    if (checkboxes[0].checked) {
+                        renderProducts(products);
+                    } else {
+                        const filtered = products.filter(p => activeCategories.includes(p.category));
+                        renderProducts(filtered);
+                    }
+                });
+            });
         });
     </script>
 </body>

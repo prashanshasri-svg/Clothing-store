@@ -3,7 +3,7 @@ export const products = [
         id: 'p1',
         name: 'Urban Utility Parka',
         price: 185.00,
-        category: 'Streetwear',
+        category: 'Men',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDGt9BsJopaFeqlgLPSV_EmOMwQTiN4P9uYnVMaGpr-lkw52zRB_Zrux-A3pN2CpDT6C27X-cXZ-DF-i4ZJbwESgWUzLaKuCWu8ds1uF2TR6fRj7e73pLtSQNL-ROZEqLX6l9IK8mtTfX2Rp1AGehRSfNnrRk7_RQcOCRAuVGwCkDrXsF5Cu2gKHJguZ-HNgCTiiLU8S7ePZslAwGAvviJ93aSXSy6AfwTy4LOXd848IK477bvWGH1W8cgJekDqL0nBDqfjzC71EQ',
         badge: 'ORGANIC',
         description: 'A high-quality minimalist jacket in charcoal grey. Features technical texture and sleek tailoring.'
@@ -30,7 +30,7 @@ export const products = [
         id: 'p4',
         name: 'Heavyweight Tee',
         price: 55.00,
-        category: 'Essentials',
+        category: 'Men',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAkv2UWnSNRYrx23LwoAAmFb1DMTn5AjoAxAbA2IBgHTkZlI2_UYh7A-SGj_TEDgiryC6NNxk7wwYnUVIXCUqdfFJSpnT4wwN9jvUAuwsDfUkp1Cyjh3nYQH6gocZzeSvrFlNYMeeA9oT0zrc5Ao1F7P3TYlMPlFITAxvM8eMLz8jyXwxJZdYrxtY_9Hlkqk2498rTiEiMaJNjEIH1FhTSqXK1SeJ29wewGpdUc84uHUTXtl1y_Q2DmLC5uhEYIcw8j6gwkgoAi2A',
         badge: null,
         description: 'Premium, heavyweight cotton t-shirt. Emphasizing texture and durability.'
@@ -39,7 +39,7 @@ export const products = [
         id: 'p5',
         name: 'Essential Oversized Hoodie',
         price: 85.00,
-        category: 'Essentials',
+        category: 'Men',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2350pU1qVlIUBn-eK0uI_V7G4jYt8hA2k5pX1M5n8P6q7E6h3oQ1T7Z4p_G6e2Y3y_K5k2r7h3n_R8s6l8w5r5o_Z2q3p_R5l8y2t7y_X1q4y2p7q2r6l8y2_s7v6x_K7l5m_W8d6m_D5f8l9p_N5n9p2p6q3l_Z4t8m_B5v8m2t_X7y5o_T8l9r_P5m6o_M2y4p_S5n8o2p_T7l8q_K5r9m_N7x6o_D2r6l8y_P5', // Placeholder
         badge: 'BESTSELLER',
         description: 'A luxuriously soft, heavy-loopback cotton hoodie. The drop-shoulder cut provides a relaxed, modern silhouette.'
