@@ -37,7 +37,7 @@ export const products = [
     },
     {
         id: 'p5',
-        name: 'Essential Oversized Hoodie',
+        name: 'Oversized Hoodie',
         price: 85.00,
         category: 'Men',
         image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2350pU1qVlIUBn-eK0uI_V7G4jYt8hA2k5pX1M5n8P6q7E6h3oQ1T7Z4p_G6e2Y3y_K5k2r7h3n_R8s6l8w5r5o_Z2q3p_R5l8y2t7y_X1q4y2p7q2r6l8y2_s7v6x_K7l5m_W8d6m_D5f8l9p_N5n9p2p6q3l_Z4t8m_B5v8m2t_X7y5o_T8l9r_P5m6o_M2y4p_S5n8o2p_T7l8q_K5r9m_N7x6o_D2r6l8y_P5', // Placeholder

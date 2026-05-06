@@ -88,9 +88,9 @@
             <aside class="hidden md:block w-64 flex-shrink-0">
                 <h3 class="font-headline-md text-[18px] mb-md border-b border-surface-variant pb-sm">Categories</h3>
                 <ul class="space-y-sm mb-lg">
-                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" checked class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">All</span></label></li>
-                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Men</span></label></li>
-                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Women</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" checked data-category="All" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">All</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" data-category="Men" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Men</span></label></li>
+                    <li><label class="flex items-center gap-sm cursor-pointer"><input type="checkbox" data-category="Women" class="rounded border-outline text-primary focus:ring-secondary"/> <span class="text-on-surface-variant hover:text-primary transition-colors">Women</span></label></li>
                 </ul>
 
                 <h3 class="font-headline-md text-[18px] mb-md border-b border-surface-variant pb-sm">Size</h3>
@@ -120,6 +120,7 @@
 
             const gridContainer = document.getElementById('product-grid');
             const checkboxes = document.querySelectorAll('aside ul input[type="checkbox"]');
+            const allCheckbox = Array.from(checkboxes).find(cb => cb.dataset.category === 'All');
             
             function renderProducts(productsToRender) {
                 if (productsToRender.length === 0) {
@@ -148,25 +149,25 @@
 
             checkboxes.forEach(cb => {
                 cb.addEventListener('change', (e) => {
-                    const labelSpan = e.target.nextElementSibling.textContent.trim();
+                    const selectedCategory = e.target.dataset.category;
                     
-                    if (labelSpan === 'All' && e.target.checked) {
+                    if (selectedCategory === 'All' && e.target.checked) {
                         checkboxes.forEach(c => {
                             if (c !== e.target) c.checked = false;
                         });
-                    } else if (labelSpan !== 'All' && e.target.checked) {
-                        checkboxes[0].checked = false; 
+                    } else if (selectedCategory !== 'All' && e.target.checked) {
+                        if (allCheckbox) allCheckbox.checked = false;
                     }
 
                     const activeCategories = Array.from(checkboxes)
-                        .filter(c => c.checked && c.nextElementSibling.textContent.trim() !== 'All')
-                        .map(c => c.nextElementSibling.textContent.trim());
+                        .filter(c => c.checked && c.dataset.category !== 'All')
+                        .map(c => c.dataset.category);
 
-                    if (activeCategories.length === 0 && !checkboxes[0].checked) {
-                        checkboxes[0].checked = true;
+                    if (activeCategories.length === 0 && allCheckbox && !allCheckbox.checked) {
+                        allCheckbox.checked = true;
                     }
 
-                    if (checkboxes[0].checked) {
+                    if (allCheckbox && allCheckbox.checked) {
                         renderProducts(products);
                     } else {
                         const filtered = products.filter(p => activeCategories.includes(p.category));
